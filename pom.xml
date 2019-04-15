@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ ~ Copyright (c) 2008-2019, Hazelcast, Inc. All Rights Reserved. ~ 
+	~ Licensed under the Apache License, Version 2.0 (the "License"); ~ you may 
+	not use this file except in compliance with the License. ~ You may obtain 
+	a copy of the License at ~ ~ http://www.apache.org/licenses/LICENSE-2.0 ~ 
+	~ Unless required by applicable law or agreed to in writing, software ~ distributed 
+	under the License is distributed on an "AS IS" BASIS, ~ WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. ~ See the License for 
+	the specific language governing permissions and ~ limitations under the License. 
+	~ -->
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.hazelcast.cloud</groupId>
+	<artifactId>pom</artifactId>
+	<version>0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Root POM</name>
+	<description>Examples for Hazelcast Cloud</description>
+
+	<properties>
+		<main.basedir>${project.basedir}</main.basedir>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<jdk.version>1.8</jdk.version>
+
+		<!-- Plugin versions -->
+		<exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
+		<maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
+		<maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+		<maven.checkstyle.plugin.version>3.0.0</maven.checkstyle.plugin.version>
+		<maven.assembly.plugin.version>3.1.1</maven.assembly.plugin.version>
+
+		<!-- Dependency versions -->
+		<hazelcast.version>3.12</hazelcast.version>
+		<lombok.version>1.18.6</lombok.version>
+	</properties>
+
+	<modules>
+		<module>compute</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.hazelcast</groupId>
+				<artifactId>hazelcast-client</artifactId>
+				<version>${hazelcast.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${maven-dependency-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>${exec-maven-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>checkstyle</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-checkstyle-plugin</artifactId>
+						<version>${maven.checkstyle.plugin.version}</version>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>checkstyle</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<configLocation>${main.basedir}/checkstyle/checkstyle.xml</configLocation>
+							<suppressionsLocation>${main.basedir}/checkstyle/suppressions.xml</suppressionsLocation>
+							<headerLocation>${main.basedir}/checkstyle/ClassHeader.txt</headerLocation>
+							<enableRSS>false</enableRSS>
+							<linkXRef>true</linkXRef>
+							<consoleOutput>true</consoleOutput>
+							<failsOnError>true</failsOnError>
+							<failOnViolation>true</failOnViolation>
+							<includeTestSourceDirectory>false</includeTestSourceDirectory>
+							<enableRulesSummary>true</enableRulesSummary>
+							<propertyExpansion>main.basedir=${main.basedir}</propertyExpansion>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
