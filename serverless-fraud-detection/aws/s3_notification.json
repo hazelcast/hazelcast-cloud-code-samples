@@ -1,0 +1,9 @@
+{
+"LambdaFunctionConfigurations": [
+    {
+      "Id": "ncherkas-js-demo-s3-event-configuration",
+      "LambdaFunctionArn": "<ARN_OF_IMPORT_AIRPORTS_FN>",
+      "Events": [ "s3:ObjectCreated:Put" ]
+    }
+  ]
+}
