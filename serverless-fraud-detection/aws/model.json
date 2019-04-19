@@ -5,6 +5,6 @@
   "properties": {
     "userId": { "type": "number" },
     "airportCode": { "type": "string" },
-    "transactionTimestamp": { "type": "number" }
+    "transactionTimestamp": { "type": "string" }
   }
 }

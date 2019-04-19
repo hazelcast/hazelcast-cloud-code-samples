@@ -10,6 +10,7 @@
   "dependencies": {
     "aws-sdk": "^2.437.0",
     "haversine": "^1.1.1",
-    "hazelcast-client": "^0.10.0"
+    "hazelcast-client": "^0.10.0",
+    "moment": "^2.24.0"
   }
 }
