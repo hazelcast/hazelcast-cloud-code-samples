@@ -1,0 +1,16 @@
+{
+  "name": "serverless-fraud-detection-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "validate": "npm install && node validate.js"
+  },
+  "author": "n.cherkas.ua@gmail.com",
+  "dependencies": {
+    "aws-sdk": "^2.437.0",
+    "haversine": "^1.1.1",
+    "hazelcast-client": "^0.10.0",
+    "moment": "^2.24.0"
+  }
+}
