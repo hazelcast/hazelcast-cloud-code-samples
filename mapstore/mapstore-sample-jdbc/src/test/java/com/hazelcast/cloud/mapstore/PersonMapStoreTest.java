@@ -7,11 +7,8 @@ import com.hazelcast.config.XmlConfigBuilder;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
+import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import com.hazelcast.cloud.mapstore.JdbcPersonRepository;
-import com.hazelcast.cloud.mapstore.Person;
-import com.hazelcast.cloud.mapstore.PersonMapStore;
-import com.hazelcast.cloud.mapstore.PersonRepository;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -40,28 +37,13 @@ public class PersonMapStoreTest {
     private static HikariDataSource dataSource;
 
     @BeforeClass
-    public static void createDataSource() {
-        dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl(mysql.getJdbcUrl());
-        dataSource.setDriverClassName(mysql.getDriverClassName());
-        dataSource.setUsername(mysql.getUsername());
-        dataSource.setPassword(mysql.getPassword());
-    }
-
-    @AfterClass
-    public static void closeDataSource() {
-        if (dataSource != null) {
-            dataSource.close();
-        }
-    }
-
-    @BeforeClass
-    public static void createHazelcast() {
+    public static void init() {
         Properties properties = new Properties();
-        properties.setProperty("dataSource.className", mysql.getDriverClassName());
-        properties.setProperty("dataSource.jdbcUrl", mysql.getJdbcUrl());
-        properties.setProperty("dataSource.username", mysql.getUsername());
-        properties.setProperty("dataSource.password", mysql.getPassword());
+        properties.setProperty("driverClassName", mysql.getDriverClassName());
+        properties.setProperty("jdbcUrl", mysql.getJdbcUrl());
+        properties.setProperty("username", mysql.getUsername());
+        properties.setProperty("password", mysql.getPassword());
+
         MapStoreConfig mapStoreConfig = new MapStoreConfig();
         mapStoreConfig.setClassName(PersonMapStore.class.getCanonicalName());
         mapStoreConfig.setProperties(properties);
@@ -70,13 +52,19 @@ public class PersonMapStoreTest {
         Config config = configBuilder.build();
         MapConfig mapConfig = config.getMapConfig(MAP_NAME);
         mapConfig.setMapStoreConfig(mapStoreConfig);
+
         hazelcast = Hazelcast.newHazelcastInstance(config);
+        dataSource = new HikariDataSource(new HikariConfig(properties));
+
     }
 
     @AfterClass
-    public static void shutdownHazelcast() {
+    public static void shutdown() {
         if (hazelcast != null) {
             hazelcast.shutdown();
+        }
+        if (dataSource != null) {
+            dataSource.close();
         }
     }
 

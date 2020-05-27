@@ -3,6 +3,7 @@ package com.hazelcast.cloud.mapstore;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.MapLoaderLifecycleSupport;
 import com.hazelcast.core.MapStore;
+import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.io.Serializable;
@@ -23,13 +24,7 @@ public class PersonMapStore implements MapStore<Integer, Person>, MapLoaderLifec
 
     @Override
     public void init(HazelcastInstance hazelcastInstance, Properties properties, String mapName) {
-        HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setDataSourceProperties(properties);
-        dataSource.setJdbcUrl(properties.getProperty("dataSource.jdbcUrl"));
-        dataSource.setDriverClassName(properties.getProperty("dataSource.className"));
-        dataSource.setUsername(properties.getProperty("dataSource.username"));
-        dataSource.setPassword(properties.getProperty("dataSource.password"));
-        this.dataSource = dataSource;
+        this.dataSource = new HikariDataSource(new HikariConfig(properties));
         this.personRepository = new JdbcPersonRepository(this.dataSource);
     }
 
