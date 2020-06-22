@@ -5,6 +5,7 @@ import com.hazelcast.core.MapLoaderLifecycleSupport;
 import com.hazelcast.core.MapStore;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 /**
  * Mysql {@link MapStore} implementation.
  */
+@Slf4j
 public class PersonMapStore implements MapStore<Integer, Person>, MapLoaderLifecycleSupport, Serializable {
 
     private HikariDataSource dataSource;
@@ -26,6 +28,7 @@ public class PersonMapStore implements MapStore<Integer, Person>, MapLoaderLifec
     public void init(HazelcastInstance hazelcastInstance, Properties properties, String mapName) {
         this.dataSource = new HikariDataSource(new HikariConfig(properties));
         this.personRepository = new JdbcPersonRepository(this.dataSource);
+        log.info("PersonMapStore initialized");
     }
 
     @Override
@@ -59,6 +62,7 @@ public class PersonMapStore implements MapStore<Integer, Person>, MapLoaderLifec
 
     @Override
     public void deleteAll(Collection<Integer> keys) {
+        System.out.println("PersonMapStore:: delete all");
         getRepository().delete(keys);
     }
 
@@ -75,6 +79,7 @@ public class PersonMapStore implements MapStore<Integer, Person>, MapLoaderLifec
 
     @Override
     public Iterable<Integer> loadAllKeys() {
+        log.info("Loading PersonMapStore all keys");
         return getRepository().findAllIds();
     }
 

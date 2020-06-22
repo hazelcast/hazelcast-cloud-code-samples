@@ -26,7 +26,8 @@ public class JdbcPersonRepository implements PersonRepository, Serializable {
     public void save(Person person) {
         try (Connection connection = this.dataSource.getConnection()) {
             try (PreparedStatement preparedStatement = connection
-                .prepareStatement("INSERT INTO person (id, name, lastname) VALUES (?, ?, ?)")) {
+                    .prepareStatement("INSERT INTO person (id, name, lastname) VALUES (?, ?, ?) "
+                            + "ON DUPLICATE KEY UPDATE name=VALUES(name),lastname=VALUES(lastname);")) {
                 preparedStatement.setInt(1, person.getId());
                 preparedStatement.setString(2, person.getName());
                 preparedStatement.setString(3, person.getLastname());
@@ -95,10 +96,10 @@ public class JdbcPersonRepository implements PersonRepository, Serializable {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         while (resultSet.next()) {
                             result.add(Person.builder()
-                                .id(resultSet.getInt("id"))
-                                .name(resultSet.getString("name"))
-                                .lastname(resultSet.getString("lastname"))
-                                .build());
+                                    .id(resultSet.getInt("id"))
+                                    .name(resultSet.getString("name"))
+                                    .lastname(resultSet.getString("lastname"))
+                                    .build());
                         }
                     } catch (SQLException ex) {
                         log.error("Could not obtain a ResultSet", ex);
