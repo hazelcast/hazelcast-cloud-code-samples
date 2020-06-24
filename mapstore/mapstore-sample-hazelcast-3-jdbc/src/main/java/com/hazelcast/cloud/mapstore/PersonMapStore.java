@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * Mysql {@link MapStore} implementation.
  */
 @Slf4j
-public class PersonMapStore implements MapStore<Integer, Person>, MapLoaderLifecycleSupport, Serializable {
+public class PersonMapStore implements MapStore<Integer, Person>, MapLoaderLifecycleSupport {
 
     private HikariDataSource dataSource;
 

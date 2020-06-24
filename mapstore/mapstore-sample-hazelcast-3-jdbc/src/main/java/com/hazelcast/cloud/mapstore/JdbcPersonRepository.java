@@ -14,7 +14,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 @Slf4j
-public class JdbcPersonRepository implements PersonRepository, Serializable {
+public class JdbcPersonRepository implements PersonRepository {
 
     private final DataSource dataSource;
 
