@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -8,14 +8,13 @@
         <groupId>com.hazelcast.cloud</groupId>
         <artifactId>mapstore-samples</artifactId>
         <version>0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>mapstore-sample-jdbc</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>mapstore-sample-hazelcast-3-jdbc</artifactId>
     <version>0.1-SNAPSHOT</version>
 
-    <name>mapstore-sample-jdbc</name>
+
+    <name>Hazelcast 3.x.x Map Store JDBC Sample</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,9 +28,15 @@
         <logback-classic.version>1.2.3</logback-classic.version>
         <assertj-core.version>3.16.0</assertj-core.version>
         <shaded.prefix>com.hazelcast.cloud.mapstore.shaded</shaded.prefix>
+        <lombok.version>1.18.12</lombok.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -51,13 +56,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback-classic.version}</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
@@ -97,14 +97,9 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
-                        <configuration>
-                            <createSourcesJar>true</createSourcesJar>
-                            <shadeSourcesContent>true</shadeSourcesContent>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -1,8 +1,8 @@
 package com.hazelcast.cloud.mapstore;
 
 import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.MapLoaderLifecycleSupport;
-import com.hazelcast.core.MapStore;
+import com.hazelcast.map.MapLoaderLifecycleSupport;
+import com.hazelcast.map.MapStore;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class PersonMapStore implements MapStore<Integer, Person>, MapLoaderLifec
     public void init(HazelcastInstance hazelcastInstance, Properties properties, String mapName) {
         this.dataSource = new HikariDataSource(new HikariConfig(properties));
         this.personRepository = new JdbcPersonRepository(this.dataSource);
-        log.info("PersonMapStore initialized");
+        log.info("PersonMapStore::initialized");
     }
 
     @Override
@@ -37,10 +37,12 @@ public class PersonMapStore implements MapStore<Integer, Person>, MapLoaderLifec
         if (dataSource != null) {
             dataSource.close();
         }
+        log.info("PersonMapStore::destroyed");
     }
 
     @Override
     public void store(Integer key, Person value) {
+        log.info("PersonMapStore::store key {} value {}", key, value);
         getRepository().save(Person.builder()
             .id(key)
             .name(value.getName())
@@ -50,6 +52,7 @@ public class PersonMapStore implements MapStore<Integer, Person>, MapLoaderLifec
 
     @Override
     public void storeAll(Map<Integer, Person> map) {
+        log.info("PersonMapStore::store all {}", map);
         for (Map.Entry<Integer, Person> entry : map.entrySet()) {
             store(entry.getKey(), entry.getValue());
         }
@@ -57,29 +60,32 @@ public class PersonMapStore implements MapStore<Integer, Person>, MapLoaderLifec
 
     @Override
     public void delete(Integer key) {
+        log.info("PersonMapStore::delete key {}", key);
         getRepository().delete(key);
     }
 
     @Override
     public void deleteAll(Collection<Integer> keys) {
-        System.out.println("PersonMapStore:: delete all");
+        log.info("PersonMapStore::delete all {}", keys);
         getRepository().delete(keys);
     }
 
     @Override
     public Person load(Integer key) {
+        log.info("PersonMapStore::load by key {}", key);
         return getRepository().find(key).orElse(null);
     }
 
     @Override
     public Map<Integer, Person> loadAll(Collection<Integer> keys) {
+        log.info("PersonMapStore::loadAll by keys {}", keys);
         return getRepository().findAll(keys).stream()
             .collect(Collectors.toMap(Person::getId, Function.identity()));
     }
 
     @Override
     public Iterable<Integer> loadAllKeys() {
-        log.info("Loading PersonMapStore all keys");
+        log.info("PersonMapStore::loadAllKeys");
         return getRepository().findAllIds();
     }
 

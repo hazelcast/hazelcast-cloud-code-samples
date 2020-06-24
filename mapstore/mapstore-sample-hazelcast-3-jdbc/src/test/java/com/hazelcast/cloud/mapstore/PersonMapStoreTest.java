@@ -9,6 +9,7 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -69,6 +70,7 @@ public class PersonMapStoreTest {
     }
 
     @Before
+    @After
     public void clearAll() {
         getMap().clear();
         getRepository().deleteAll();

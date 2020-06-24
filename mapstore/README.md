@@ -16,7 +16,8 @@ To do this, you can use Hazelcast’s `MapStore` and `MapLoader` interfaces.
 
 ## Samples
  
-- [MapStore JDBC Sample](mapstore-sample-jdbc/README.md)
+- [Hazelcast 3.X.X 3MapStore JDBC Sample](mapstore-sample-hazelcast-3-jdbc/README.md)
+- [Hazelcast 4.X.X MapStore JDBC Sample](mapstore-sample-hazelcast-4-jdbc/README.md)
 
 ## How to run?
 
@@ -36,5 +37,4 @@ https://docs.hazelcast.org/docs/latest/manual/html-single/index.html#loading-and
 ## F.A.Q.
 
 - Why do we need to use `maven-shade-plugin`?
-> In order to make sure, that all MapStore dependencies are available in the final JAR. Such JAR can be used as
-> a part of the `classpath`, e.g. for https://cloud.hazelcast.com/. 
+> In order to make sure, that all MapStore dependencies are available in the final JAR. 
