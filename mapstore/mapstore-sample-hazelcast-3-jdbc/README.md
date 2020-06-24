@@ -1,4 +1,4 @@
-# MapStore JDBC Sample
+# Hazelcast 3.X.X MapStore JDBC Sample
 
 This is an example of how to use `MapStore` and `JDBC`.
 
