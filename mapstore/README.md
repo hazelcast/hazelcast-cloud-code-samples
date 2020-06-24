@@ -16,7 +16,7 @@ To do this, you can use Hazelcast’s `MapStore` and `MapLoader` interfaces.
 
 ## Samples
  
-- [Hazelcast 3.X.X 3MapStore JDBC Sample](mapstore-sample-hazelcast-3-jdbc/README.md)
+- [Hazelcast 3.X.X MapStore JDBC Sample](mapstore-sample-hazelcast-3-jdbc/README.md)
 - [Hazelcast 4.X.X MapStore JDBC Sample](mapstore-sample-hazelcast-4-jdbc/README.md)
 
 ## How to run?
