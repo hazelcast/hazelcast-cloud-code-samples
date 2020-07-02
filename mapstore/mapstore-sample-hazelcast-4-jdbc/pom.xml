@@ -23,7 +23,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <hazelcast-all.version>4.0</hazelcast-all.version>
         <testcontainers.version>1.14.2</testcontainers.version>
-        <mysql.version>8.0.15</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <HikariCP.version>3.4.5</HikariCP.version>
         <junit.version>4.13</junit.version>
         <logback-classic.version>1.2.3</logback-classic.version>
