@@ -16,8 +16,10 @@ To do this, you can use Hazelcast’s `MapStore` and `MapLoader` interfaces.
 
 ## Samples
  
-- [Hazelcast 3.X.X MapStore JDBC Sample](mapstore-sample-hazelcast-3-jdbc/README.md)
-- [Hazelcast 4.X.X MapStore JDBC Sample](mapstore-sample-hazelcast-4-jdbc/README.md)
+- [Hazelcast 3.X.X MapStore JDBC Sample](mapstore-sample-hazelcast3-jdbc/README.md)
+- [Hazelcast 4.X.X MapStore JDBC Sample](mapstore-sample-hazelcast4-jdbc/README.md)
+- [Hazelcast 3.X.X MapStore Mongo Sample](mapstore-sample-hazelcast3-mongodb/README.md)
+- [Hazelcast 4.X.X MapStore Mongo Sample](mapstore-sample-hazelcast4-mongodb/README.md)
 
 ## How to run?
 

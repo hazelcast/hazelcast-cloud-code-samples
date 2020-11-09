@@ -13,11 +13,14 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
 
     <modules>
-        <module>mapstore-sample-hazelcast-3-jdbc</module>
-        <module>mapstore-sample-hazelcast-4-jdbc</module>
+        <module>mapstore-sample-hazelcast3-jdbc</module>
+        <module>mapstore-sample-hazelcast4-jdbc</module>
+        <module>mapstore-sample-hazelcast3-mongodb</module>
+        <module>mapstore-sample-hazelcast4-mongodb</module>
     </modules>
 
 
@@ -26,7 +29,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
