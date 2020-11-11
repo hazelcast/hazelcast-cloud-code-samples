@@ -9,7 +9,7 @@ Required properties:
 ## Classes
 
 - [Person](src/main/java/com/hazelcast/cloud/mapstore3/mongo/Person.java) Entity class
-- [JdbcPersonRepository](src/main/java/com/hazelcast/cloud/mapstore3/mongo/MongoPersonRepository.java) MongoDB implementation for Person Entity.
+- [MognoPersonRepository](src/main/java/com/hazelcast/cloud/mapstore3/mongo/MongoPersonRepository.java) MongoDB implementation for Person Entity.
 - [PersonMapStore](src/main/java/com/hazelcast/cloud/mapstore3/mongo/MongoPersonMapStore.java) MapStore implementation for Person Entity.
 - [PersonMapStoreTest](src/test/java/com/hazelcast/cloud/mapstore3/mongo/MongoPersonMapStoreTest.java) Person MapStore tests.
 
