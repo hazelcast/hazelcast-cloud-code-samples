@@ -4,7 +4,7 @@ This is an example of how to use `MapStore` and `MongoDB`.
 
 Required properties:
  - `uri` - Mongo connection string. See more here: https://docs.mongodb.com/manual/reference/connection-string/
- - `db` - The database 
+ - `database` - The database 
  
 ## Classes
 
