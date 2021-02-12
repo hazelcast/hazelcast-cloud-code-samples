@@ -19,7 +19,7 @@
     <properties>
         <hazelcast-all.version>3.12.10</hazelcast-all.version>
         <testcontainers.version>1.15.0</testcontainers.version>
-        <junit.version>4.13</junit.version>
+        <junit.version>4.13.1</junit.version>
         <logback-classic.version>1.2.3</logback-classic.version>
         <assertj-core.version>3.16.0</assertj-core.version>
         <lombok.version>1.18.12</lombok.version>
